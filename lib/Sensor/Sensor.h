@@ -6,7 +6,7 @@
 #include <memory>
 
 class Sensor {
-   private:
+   protected:
     const uint8_t _analogPin;
     const uint8_t* _digitalPin;
     const uint8_t* _powerPin;
@@ -25,6 +25,17 @@ class Sensor {
     void off();
     int read();
     bool isAboveThreshold();
+};
+
+class MoistureSensor : public Sensor {
+   private:
+    int valueToMoisturePercent(int value);
+
+   public:
+    MoistureSensor(const uint8_t analogPin);
+    MoistureSensor(const uint8_t analogPin, const uint8_t& digitalPin);
+    MoistureSensor(const uint8_t analogPin, const uint8_t& digitalPin, const uint8_t& powerPin);
+    int readMoisturePercentage();
 };
 
 #endif  // SENSOR_H

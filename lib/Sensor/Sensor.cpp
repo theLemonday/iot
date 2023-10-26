@@ -41,3 +41,17 @@ int Sensor::read() {
 bool Sensor::isAboveThreshold() {
     return digitalRead(*_digitalPin) == HIGH;
 }
+
+MoistureSensor::MoistureSensor(const uint8_t analogPin) : Sensor(analogPin) {}
+MoistureSensor::MoistureSensor(const uint8_t analogPin, const uint8_t& digitalPin) : Sensor(analogPin, digitalPin) {}
+MoistureSensor::MoistureSensor(const uint8_t analogPin, const uint8_t& digitalPin, const uint8_t& powerPin) : Sensor(analogPin, digitalPin, powerPin) {}
+
+int MoistureSensor::valueToMoisturePercent(int value) {
+    int percent = map((long)value, 0, 1023, 0, 100);
+    percent = 100 - percent;
+    return percent;
+}
+
+int MoistureSensor::readMoisturePercentage() {
+    return valueToMoisturePercent(this->read());
+}

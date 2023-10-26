@@ -27,7 +27,7 @@ void setup() {
     Blynk.begin(BLYNK_AUTH_TOKEN, SSID, WIFI_PASSWORD);
 }
 
-BLYNK_WRITE(V1) {
+BLYNK_WRITE(V0) {
     if (param.asInt() == 1) {
         led.on();
         lightSensor = 1;
