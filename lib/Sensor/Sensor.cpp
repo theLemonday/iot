@@ -25,13 +25,21 @@ Sensor::Sensor(const uint8_t analogPin, const uint8_t& digitalPin) : Sensor(anal
 Sensor::Sensor(const uint8_t analogPin, const uint8_t& digitalPin, const uint8_t& powerPin) : Sensor(analogPin, &digitalPin, &powerPin) {}
 
 void Sensor::on() {
+    if (_powerPin == nullptr) {
+        Serial.println("Power pin is not defined");
+        return;
+    }
+
     digitalWrite(*_powerPin, HIGH);
-    Serial.println(*_powerPin);
 }
 
 void Sensor::off() {
+    if (_powerPin == nullptr) {
+        Serial.println("Power pin is not defined");
+        return;
+    }
+
     digitalWrite(*_powerPin, LOW);
-    Serial.println(*_powerPin);
 }
 
 int Sensor::read() {
@@ -39,6 +47,11 @@ int Sensor::read() {
 }
 
 bool Sensor::isAboveThreshold() {
+    if (_digitalPin == nullptr) {
+        Serial.println("Digital pin is not defined");
+        return false;
+    }
+
     return digitalRead(*_digitalPin) == HIGH;
 }
 

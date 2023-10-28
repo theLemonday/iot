@@ -15,7 +15,7 @@ WebSocketsClient webSocket;
 Sensor moistureSensor(A0, D0);
 Relay pumpRelay(D2);
 
-const int MOISTURE_REPONSE_CAPACITY = JSON_OBJECT_SIZE(3);
+const int REPONSE_CAPACITY = JSON_OBJECT_SIZE(3);
 
 const unsigned long INTERVAL = 1000;
 
@@ -38,7 +38,7 @@ String readMoistureSensor() {
     }
     const int realValue = value / 10;
 
-    StaticJsonDocument<MOISTURE_REPONSE_CAPACITY> data;
+    StaticJsonDocument<REPONSE_CAPACITY> data;
     data["type"] = "moisture";
     data["moisture_percent"] = valueToMoisturePercent(realValue);
     data["exceed"] = moistureSensor.isAboveThreshold();

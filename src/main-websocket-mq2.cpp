@@ -13,7 +13,7 @@ WebSocketsClient webSocket;
 
 Sensor MQ2Sensor(A0, D0);
 
-const int MOISTURE_REPONSE_CAPACITY = JSON_OBJECT_SIZE(3);
+const int REPONSE_CAPACITY = JSON_OBJECT_SIZE(3);
 
 const unsigned long INTERVAL = 1000;
 
@@ -30,7 +30,7 @@ String readMQ2Sensor() {
     }
     const int realValue = value / 10;
 
-    StaticJsonDocument<MOISTURE_REPONSE_CAPACITY> data;
+    StaticJsonDocument<REPONSE_CAPACITY> data;
     data["type"] = "mq2";
     data["value"] = realValue;
     data["exceed"] = MQ2Sensor.isAboveThreshold();
